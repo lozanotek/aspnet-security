@@ -1,0 +1,33 @@
+﻿@using SimpleAuthentication.Mvc
+@model Social.ViewModels.SocialIdentityViewModel[]
+
+@section styles {
+    @Styles.Render("~/content/zocial")
+}
+
+@section scripts {
+    <script>
+        $(function() {
+            $(".zocial").click(function() {
+                var button = $(this);
+                var id = button.attr("data-social");
+                $("#id").val(id);
+            });
+        });
+    </script>
+}
+
+<div class="row">
+    <h2>Login socially with ...</h2>
+    <form class="form-inline">
+        <input type="hidden" name="id" id="id" />
+        <div class="form-group">
+            <div class="col-md-12">
+                @foreach (var identity in Model)
+                {
+                    <a href="@Url.RedirectToProvider(identity.Id)" data-social="@identity.Id" class="zocial @identity.CssName">@identity.Name</a><text>&nbsp;</text>
+                }
+            </div>
+        </div>
+    </form>
+</div>
