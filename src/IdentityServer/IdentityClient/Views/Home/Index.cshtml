@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Identity Server Demo</h1>
+    <p class="lead">Simple OpenID Connect (OIDC) Client Demo with ASP.NET and Identity Server.</p>
+    <p><a href="https://github.com/lozanotek/aspnet-security" class="btn btn-primary btn-lg">Github Repo &raquo;</a></p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h3>User Identity</h3>
+            <p>
+                <dl>
+                    @foreach (var claim in System.Security.Claims.ClaimsPrincipal.Current.Claims)
+                    {
+                        <dt>@claim.Type</dt>
+                        <dd>@claim.Value</dd>
+                    }
+                </dl>
+            </p>
+            <p><a href="~/account/signout" class="btn btn-danger">Sign Out &raquo;</a></p>
+        }
+        else
+        {
+            <a href="~/account/signin" class="btn btn-success">Sign In &raquo;</a>
+        }
+    </div>
+</div>
