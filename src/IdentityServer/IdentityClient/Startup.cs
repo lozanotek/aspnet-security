@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IdentityModel.Tokens;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Notifications;
@@ -37,10 +34,10 @@ namespace IdentityClient
                 Scope = SecurityConstants.Scope,
                 ResponseType = SecurityConstants.HydridResponseType,
                 SignInAsAuthenticationType = SecurityConstants.AuthenticationType,
-                Notifications = new OpenIdConnectAuthenticationNotifications
-                {
-                    AuthorizationCodeReceived = AuthCodeReceived
-                }
+                //Notifications = new OpenIdConnectAuthenticationNotifications
+                //{
+                //    AuthorizationCodeReceived = AuthCodeReceived
+                //}
             });
         }
 

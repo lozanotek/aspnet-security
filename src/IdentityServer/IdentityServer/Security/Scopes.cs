@@ -11,7 +11,7 @@ namespace IdentityServer.Security
             {
                 StandardScopes.Email,
                 StandardScopes.OpenId,
-                StandardScopes.Profile,
+                StandardScopes.ProfileAlwaysInclude,
                 StandardScopes.Roles
             };
         }

@@ -16,7 +16,7 @@ namespace IdentityServer.Security
                     ClientName = "client1",
                     ClientId = "client1",
                     Flow = Flows.Hybrid,
-                    RequireConsent = true,
+                    RequireConsent = false,
                     AccessTokenType = AccessTokenType.Jwt,
                     ClientSecrets = new List<Secret>
                     {

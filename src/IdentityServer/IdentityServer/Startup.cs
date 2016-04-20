@@ -9,14 +9,13 @@ namespace IdentityServer
     {
         public void Configuration(IAppBuilder app)
         {
-            Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Debug()
-     .WriteTo.Trace()
-    .CreateLogger();
+            //Log.Logger = new LoggerConfiguration()
+            //                .MinimumLevel.Debug()
+            //                .WriteTo.Trace()
+            //                .CreateLogger();
 
             app.Map("/identity", idsrvApp =>
             {
-
                 idsrvApp.UseIdentityServer(new IdentityServerOptions
                 {
                     RequireSsl = false,
