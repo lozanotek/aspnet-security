@@ -32,9 +32,7 @@ namespace ApiAuth.Security
 
         private CallerIdentity ParseToken(ApiToken apiToken)
         {
-            if (apiToken == null || 
-                string.IsNullOrWhiteSpace(apiToken.Scheme) || 
-                string.IsNullOrWhiteSpace(apiToken.Value))
+            if (string.IsNullOrWhiteSpace(apiToken?.Scheme) || string.IsNullOrWhiteSpace(apiToken.Value))
             {
                 return null;
             }

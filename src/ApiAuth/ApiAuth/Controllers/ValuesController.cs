@@ -6,14 +6,8 @@ namespace ApiAuth.Controllers
 {
     public class ValuesController : ApiController
     {
-        public new SecurityPrincipal User
-        {
-            get
-            {
-                return base.User as SecurityPrincipal;
-            }
-        }
-       
+        public new SecurityPrincipal User => base.User as SecurityPrincipal;
+
         // GET api/values
         public IEnumerable<string> Get()
         {
