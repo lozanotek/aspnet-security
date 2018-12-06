@@ -5,6 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
+using JWT;
+using JWT.Serializers;
+
 namespace ApiAuth.Security
 {
     public class JwtTokenHandler : DelegatingHandler
@@ -14,7 +17,7 @@ namespace ApiAuth.Security
             var apiToken = GetApiToken(request);
             if (apiToken == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.Unauthorized) {Content = new StringContent("Invalid API key")};
+                return new HttpResponseMessage(HttpStatusCode.Unauthorized) { Content = new StringContent("Invalid API key") };
             }
 
             var callerIdentity = ParseToken(apiToken);
@@ -44,13 +47,21 @@ namespace ApiAuth.Security
 
             try
             {
-                var callerInfo = JWT.JsonWebToken.DecodeToObject<CallerIdentity>(apiToken.Value, "secret");
-                return callerInfo;
+                IJsonSerializer serializer = new JsonNetSerializer();
+                IDateTimeProvider provider = new UtcDateTimeProvider();
+                IJwtValidator validator = new JwtValidator(serializer, provider);
+                IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+                IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder);
+
+                var token = apiToken.Value;
+
+                var callerIdentity = decoder.DecodeToObject<CallerIdentity>(token, "secret", true);
+                return callerIdentity;
             }
             catch
             {
                 // Lame, I know...but it's a demo
-                return null;   
+                return null;
             }
         }
 
