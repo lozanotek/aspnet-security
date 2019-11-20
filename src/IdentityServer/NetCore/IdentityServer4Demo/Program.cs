@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.Hosting;
+
 using Serilog;
 using Serilog.Events;
-using System;
 
 namespace IdentityServer4Demo
 {
@@ -22,7 +19,7 @@ namespace IdentityServer4Demo
 
         public static IHostBuilder BuildWebHostBuilder(string[] args)
         {
-            return Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
+            return Host.CreateDefaultBuilder(args)
                 .UseSerilog((ctx, config) =>
                 {
                     config.MinimumLevel.Debug()
@@ -45,15 +42,6 @@ namespace IdentityServer4Demo
                             flushToDiskInterval: TimeSpan.FromSeconds(1));
                     }
                 })
-                // .ConfigureAppConfiguration((ctx, builder) =>
-                // {
-                //     var config = builder.Build();
-                //     var tokenProvider = new AzureServiceTokenProvider();
-                //     var kvClient = new KeyVaultClient((authority, resource, scope) => tokenProvider.KeyVaultTokenCallback(authority, resource, scope));
-
-                //     var url = config["KeyVault:BaseUrl"];
-                //     builder.AddAzureKeyVault(config["KeyVault:BaseUrl"], kvClient, new DefaultKeyVaultSecretManager());
-                // })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
