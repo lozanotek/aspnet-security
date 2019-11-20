@@ -1,0 +1,33 @@
+﻿@model string[]
+
+@section scripts {
+    <script>
+        $(function() {
+            $(".provider").click(function() {
+                var button = $(this);
+                var id = button.attr("data-provider");
+                $("#provider").val(id);
+
+                $("#providerForm").submit();
+            });
+        });
+    </script>
+}
+
+<div class="row">
+    <h2>Login socially with ...</h2>
+    <form class="form-inline" id="providerForm" name="providerForm" method="post">
+        <input type="hidden" name="provider" id="provider" />
+        <div class="form-group">
+            <div class="col-md-12">
+                @foreach (var identity in Model)
+                {
+                    var provider = identity.ToLower();
+                <button type="button" data-provider="@identity" class="btn btn-primary provider">
+                    <i class="fa fa-@provider"></i>&nbsp;@identity
+                </button><text>&nbsp;</text>
+                }
+            </div>
+        </div>
+    </form>
+</div>
