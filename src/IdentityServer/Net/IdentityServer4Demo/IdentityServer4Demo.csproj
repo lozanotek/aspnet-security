@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+      <UserSecretsId>dee27fa9-5c46-4e88-a252-edbf0805586b</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IdentityServer4" Version="4.1.2" />
+
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.7" />
+        <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    </ItemGroup>
+
+</Project>

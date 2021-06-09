@@ -1,0 +1,24 @@
+### IdP variables
+@authority = 
+@clientId = 
+@clientSecret = 
+@grantType = client_credentials
+@scope = 
+
+# @name IdP
+POST {{authority}}
+CONTENT-TYPE: application/x-www-form-urlencoded
+
+client_id={{clientId}}
+&client_secret={{clientSecret}}
+&grant_type={{grantType}}
+&scope={{scope}}
+
+### API Call
+@accessToken = {{IdP.response.body.access_token}}
+@apiHost = localhost:44343
+
+# @name UserAPI
+GET https://{{apiHost}}/user
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
