@@ -4,6 +4,7 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 services.AddAuthN(configuration)
+        .AddPermissions() // wire up the permission components (authz)
         .AddControllersWithViews();
 
 var app = builder.Build();

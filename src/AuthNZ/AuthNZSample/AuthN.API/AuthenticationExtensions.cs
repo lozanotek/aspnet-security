@@ -8,6 +8,9 @@ public static class AuthenticationExtensions
 {
     public static IServiceCollection AddApiAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
+        // Clear all the claim type mappings
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+        
         var schemeNames = new TokenAuthority[] {
                 new TokenAuthority { Name = "Auth0", Issuer = configuration["Auth0:Authority"] },
                 new TokenAuthority { Name = "Okta", Issuer = configuration["Okta:Authority"] },

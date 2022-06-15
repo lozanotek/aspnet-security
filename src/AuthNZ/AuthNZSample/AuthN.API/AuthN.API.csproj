@@ -11,4 +11,8 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AuthZ\AuthZ.csproj" />
+    </ItemGroup>
+
 </Project>
