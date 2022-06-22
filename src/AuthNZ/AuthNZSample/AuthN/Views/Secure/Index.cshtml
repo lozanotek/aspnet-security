@@ -1,0 +1,101 @@
+﻿@using AuthZ
+@model AuthN.Models.SecureViewModel
+@{
+    var principal = Model?.Principal;
+    var identity = principal?.Identity;
+    var claims = principal?.Claims;
+
+    var authScheme = @Model?.AuthScheme;
+
+    var properties = Model?.AuthenticateResult.Properties;
+
+    var appRoles = principal?.AppRoles();
+    var permissions = principal?.Permissions();
+}
+
+<div class="diagnostics-page">
+    <div class="col-md-12">
+        <div class="row">
+            <h1 class="col-md-6">Authenticated via @authScheme</h1>
+            <h2>@identity?.Name</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <a href="/signout" class="btn btn-danger col-md-6 text-right">Logout &raquo;</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Claims</h2>
+                    </div>
+                    <div class="card-body">
+                        <dl>
+                            @foreach (var claim in claims)
+                            {
+                                <dt>@claim.Type</dt>
+                                <dd>@claim.Value</dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Properties</h2>
+                    </div>
+                    <div class="card-body">
+                        <dl>
+                            @foreach (var prop in properties?.Items)
+                            {
+                                <dt>@prop.Key</dt>
+                                <dd>@prop.Value</dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            
+            @if (appRoles.Any())
+            {
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>App Roles</h2>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                @foreach (var appRole in appRoles)
+                                {
+                                    <li>@appRole</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+            @if (permissions.Any())
+            {
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Permissions</h2>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                @foreach (var permission in permissions)
+                                {
+                                    <li>@permission</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
