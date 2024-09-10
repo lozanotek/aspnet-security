@@ -34,7 +34,7 @@ namespace MyApp
                 options.Authority = "https://localhost:5001";
                 options.RequireHttpsMetadata = false;
                 options.ResponseType = "code";
-
+                
                 options.ClientId = "MyApp";
              
                 options.Scope.Clear();

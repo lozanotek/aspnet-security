@@ -42,7 +42,8 @@ public static class Database
             Name = "Editor",
             Subjects = new []
             {
-                "__add__auth0__"
+                //"__add__auth0__"
+                "auth0|62a7c0979dc71e396ce57392"
             }
         },
         new AppRole
@@ -50,7 +51,8 @@ public static class Database
             Name = "Admin",
             Subjects = new []
             {
-                "__add__okta__"
+                //"__add__okta__"
+                "okta.demo@lozanotek.com"
             }
         },
         new AppRole

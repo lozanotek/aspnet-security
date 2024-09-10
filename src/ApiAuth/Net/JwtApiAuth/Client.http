@@ -1,9 +1,9 @@
 ### IdP variables
-@authority = 
-@clientId = 
-@clientSecret = 
+@authority =  https://login.microsoftonline.com/ab322bf9-5da5-4488-97c1-19e14b49f496/oauth2/v2.0/token
+@clientId = 73c58d91-5d33-485c-8be6-d13d1603f5ff
+@clientSecret = oQ9.nMA3xD_Fi3dkur.MG1kk64ymU5~_nQ
 @grantType = client_credentials
-@scope = 
+@scope = api://7f8d57c1-80e7-45bd-930d-63acbee921f6/.default
 
 # @name IdP
 POST {{authority}}

@@ -2,10 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-
-using AspNet.Security.OAuth.GitHub;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,10 +41,10 @@ namespace ManualOAuth
 
                     options.Scope.Add("profile");
 
-                    options.Events = new OAuthEvents
-                    {
-                        OnCreatingTicket = CreateOAuthTicketAsync
-                    };
+                    //options.Events = new OAuthEvents
+                    //{
+                    //    OnCreatingTicket = CreateOAuthTicketAsync
+                    //};
                 })
                 .AddGitHub(options =>
                 {
@@ -59,10 +56,10 @@ namespace ManualOAuth
 
                     options.Scope.Add("user:email");
 
-                    options.Events = new OAuthEvents
-                    {
-                        OnCreatingTicket = CreateOAuthTicketAsync
-                    };
+                    //options.Events = new OAuthEvents
+                    //{
+                    //    OnCreatingTicket = CreateOAuthTicketAsync
+                    //};
                 });
 
             services.AddControllersWithViews();
@@ -70,9 +67,10 @@ namespace ManualOAuth
 
         private async Task CreateOAuthTicketAsync(OAuthCreatingTicketContext context)
         {
+            var accessToken = context.AccessToken;
             var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
             response.EnsureSuccessStatusCode();

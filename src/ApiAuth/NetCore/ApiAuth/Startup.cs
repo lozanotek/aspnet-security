@@ -31,12 +31,15 @@ namespace ApiAuth
 
             services.AddControllersWithViews();
 
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            var builder = services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+
+            builder
                 .AddJwtBearer(x =>
                 {
                     // Disabled only for local dev
                     x.RequireHttpsMetadata = false;
+
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters
                     {

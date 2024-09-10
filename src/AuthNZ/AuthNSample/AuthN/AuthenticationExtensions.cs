@@ -1,6 +1,7 @@
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Okta.AspNetCore;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +9,8 @@ public static class AuthenticationExtensions
 {
     public static IServiceCollection AddAuthN(this IServiceCollection services, IConfiguration configuration)
     {
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
@@ -50,21 +53,21 @@ public static class AuthenticationExtensions
      
                 options.SaveTokens = true;
             })
-            .AddOktaMvc(new OktaMvcOptions
+            .AddOktaMvc("Okta", new OktaMvcOptions
             {
                 // Replace these values with your Okta configuration
                 OktaDomain = configuration["Okta:OktaDomain"],
                 ClientId = configuration["Okta:ClientId"],
-                ClientSecret = configuration["Okta:ClientSecret"]
-                //AuthorizationServerId = ""
-            })
+                ClientSecret = configuration["Okta:ClientSecret"],
+				Scope = ["openid", "profile", "email"]
+			})
             .AddAuth0WebAppAuthentication(options => {
                 options.Domain = configuration["Auth0:Domain"];
                 options.ClientId = configuration["Auth0:ClientId"];
                 options.ClientSecret = configuration["Auth0:ClientSecret"];
                 
                 options.SkipCookieMiddleware = true;
-            });
+            });         
 
         return services;
     }

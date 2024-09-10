@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProviderAuthentication.Models;
-using System;
-using System.Collections.Generic;
+
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProviderAuthentication.Controllers
@@ -29,10 +28,11 @@ namespace ProviderAuthentication.Controllers
             return View();
         }
 
-        [Authorize]
-        public IActionResult Secure()
+        [Authorize(AuthenticationSchemes = "Microsoft")]
+        public async Task<IActionResult> Secure()
         {
-            return View();
+            var model = new DiagnosticsViewModel(await HttpContext.AuthenticateAsync());
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

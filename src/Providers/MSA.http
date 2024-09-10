@@ -1,0 +1,11 @@
+@clientId =73c58d91-5d33-485c-8be6-d13d1603f5ff&
+@secret = 
+@scope = api://7f8d57c1-80e7-45bd-930d-63acbee921f6/.default
+
+POST https://login.microsoftonline.com/ab322bf9-5da5-4488-97c1-19e14b49f496/oauth2/v2.0/token 
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{clientId}}
+&client_secret={{secret}}
+&scope={{scope}}
+&grant_type=client_credentials

@@ -20,7 +20,8 @@ public class HomeController : Controller
             GitHubAuthenticationDefaults.AuthenticationScheme,
             GoogleDefaults.AuthenticationScheme,
             MicrosoftAccountDefaults.AuthenticationScheme,
-            OktaDefaults.MvcAuthenticationScheme,
+            //OktaDefaults.MvcAuthenticationScheme,
+            "Okta",
             Auth0Constants.AuthenticationScheme
         };
 
