@@ -10,6 +10,7 @@ public class EditController : Controller
     public bool Get()
     {
         var user = User;
+
         var permissions = user.Permissions();
 
         return permissions.Contains("CanEdit");

@@ -3,7 +3,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>a60bbdf6-02b2-4305-9199-5acc4d8579cf</UserSecretsId>
+        <UserSecretsId>authn-demo</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>

@@ -55,18 +55,19 @@ public static class AuthenticationExtensions
             })
             .AddOktaMvc("Okta", new OktaMvcOptions
             {
-                // Replace these values with your Okta configuration
-                OktaDomain = configuration["Okta:OktaDomain"],
+                OktaDomain = configuration["Okta:Domain"],
                 ClientId = configuration["Okta:ClientId"],
                 ClientSecret = configuration["Okta:ClientSecret"]
-                //AuthorizationServerId = ""
             })
             .AddAuth0WebAppAuthentication(options => {
                 options.Domain = configuration["Auth0:Domain"];
                 options.ClientId = configuration["Auth0:ClientId"];
                 options.ClientSecret = configuration["Auth0:ClientSecret"];
-                
-                options.SkipCookieMiddleware = true;
+				options.Scope = "openid profile email offline_access";
+
+				options.ResponseType = "code";
+
+				options.SkipCookieMiddleware = true;
             });
 
         return services;
